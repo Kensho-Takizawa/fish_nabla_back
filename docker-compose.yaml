@@ -1,0 +1,71 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: nginx-fish
+    image: nginx:1.19.1
+#    depends_on:
+#      - php
+    ports:
+      - 8002:80
+      - 44301:443
+    volumes:
+      - ./laravel:/var/www/html
+      - ./docker/local/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/local/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/local/nginx/cert:/etc/cert
+
+#  php:
+#    container_name: php-fish
+#    build:
+#      context: ./docker/local/php
+#    environment:
+#      PHP_IDE_CONFIG: 'serverName=localhost'
+#    ports:
+#      - '9000:9000'
+#    volumes:
+#      - ./laravel:/var/www/html:delegated
+#      - ./laravel/app:/var/www/html/app:cached
+#      - ./laravel/database:/var/www/html/database:cached
+#      - ./laravel/routes:/var/www/html/routes:cached
+#      - ./laravel/src:/var/www/html/src:cached
+#      - ./laravel/tests:/var/www/html/tests:cached
+#      - ./laravel/config:/var/www/html/config:cached
+#      - ./docker/local/php/tmp:/tmp/php:delegated
+#      - ./docker/local/php/php-fpm.d/docker.conf:/usr/local/etc/php-fpm.d/docker.conf:ro
+#      - ./docker/local/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
+#      - ./docker/local/php/php-fpm.d/xdebug.conf:/usr/local/etc/php-fpm.d/xdebug.conf:ro
+#      - ./docker/local/php/php-fpm.d/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
+#      - ./docker/local/php/php.ini-develop:/usr/local/etc/php/php.ini:ro
+#
+#  postgresql:
+#    container_name: pgsql-fish
+#    build:
+#      context: ./docker/local/postgresql
+#    command: ['-c', 'config_file=/etc/postgresql/postgresql.conf']
+#    ports:
+#      - '5432:5432'
+#    volumes:
+#      - pgsql-volume:/var/lib/postgresql
+#      - ./docker/local/postgresql/initdb.d:/docker-entrypoint-initdb.d:ro
+#      - ./docker/local/postgresql/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+#    environment:
+#      LANG: ja_JP.utf8
+#      LC_MESSAGES: C
+#      POSTGRES_PASSWORD: password
+#
+#  postgresql-reader:
+#    depends_on:
+#      - postgresql
+#    container_name: pgsql-reader-fish
+#    build:
+#      context: ./docker/local/postgresql-reader
+#    ports:
+#      - '54320:5432'
+#    environment:
+#      LANG: ja_JP.utf8
+#      LC_MESSAGES: C
+#      POSTGRES_PASSWORD: password
+#
+#
+#volumes:
+#  pgsql-volume:
